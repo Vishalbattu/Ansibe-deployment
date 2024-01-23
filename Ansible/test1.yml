@@ -1,0 +1,18 @@
+---
+- name: Run Docker Container Playbook
+  hosts: my_hosts
+
+  become_user: ec2-user
+
+  tasks:
+    - name: Pull Docker Image
+      docker_image:
+        name: "vishalbattu/cicd:latest"
+        source: pull
+
+    - name: Run Docker Container
+      docker_container:
+        name: my_cicd_container
+        image: "vishalbattu/cicd:latest"
+        ports:
+          - "8080:5000"

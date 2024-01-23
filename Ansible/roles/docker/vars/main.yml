@@ -1,0 +1,5 @@
+---
+
+docker_image_name: "vishalbattu/cicd:latest"
+docker_container_name: "my_cicd_container"
+docker_ports: "8080:5000"

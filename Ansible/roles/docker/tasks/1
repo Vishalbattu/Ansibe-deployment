@@ -1,0 +1,12 @@
+---   
+- name: Pull Docker Image
+  docker_image:
+   name: "{{docker_image_name}}"
+   source: pull
+
+- name: Run Docker Container
+  docker_container:
+   name: "{{docker_container_name}}"
+   image: "{{docker_image_name}}"
+   ports:
+     - "{{docker_ports}}"
