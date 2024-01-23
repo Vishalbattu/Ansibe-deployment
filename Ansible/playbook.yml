@@ -1,0 +1,27 @@
+---
+- name: Run Docker Container Playbook
+  hosts: all
+  become: yes
+  become_user: ec2-user
+
+  tasks:
+    - name: Pull Docker Image
+      docker_image:
+        name: "vishalbattu/cicd:latest"
+        source: pull
+
+    - name: Copy Docker Entrypoint Script
+      copy:
+        src: files/docker_entrypoint.sh
+        dest: /usr/local/bin/docker_entrypoint.sh
+        mode: 0755
+
+    - name: Run Docker Container
+      docker_container:
+        name: my_cicd_container
+        image: "vishalbattu/cicd:latest"
+        ports:
+          - "8080:5000"
+        detach: yes
+        entrypoint: /usr/local/bin/docker_entrypoint.sh
+

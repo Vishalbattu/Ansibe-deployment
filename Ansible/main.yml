@@ -1,0 +1,6 @@
+---
+- name: Run Docker Container Playbook
+  hosts: my_hosts
+  become_user: ec2-user
+  roles: 
+    - docker
